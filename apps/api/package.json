@@ -1,0 +1,56 @@
+{
+  "name": "@aurel/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env --watch --import tsx src/server.ts",
+    "build": "tsc --noEmit && esbuild src/server.ts src/worker.ts --bundle --platform=node --format=esm --packages=external --alias:@aurel/shared=../../packages/shared/src/index.ts --outdir=dist",
+    "start": "node --env-file-if-exists=.env dist/server.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@aurel/shared": "workspace:*",
+    "@prisma/client": "6.19.0",
+    "express": "^5.1.0",
+    "argon2": "^0.44.0",
+    "jsonwebtoken": "^9.0.2",
+    "ioredis": "^5.8.2",
+    "zod": "^4.6.6",
+    "pino": "^9.14.0",
+    "pino-http": "^10.5.0",
+    "helmet": "^8.1.0",
+    "cors": "^2.8.5",
+    "cookie-parser": "^1.4.7",
+    "compression": "^1.8.1",
+    "hpp": "^0.2.3",
+    "rate-limiter-flexible": "^7.3.0",
+    "sanitize-html": "^2.17.0",
+    "multer": "^2.0.2",
+    "sharp": "^0.35.5",
+    "file-type": "^21.1.1",
+    "@aws-sdk/client-s3": "^3.940.0",
+    "@aws-sdk/s3-request-presigner": "^3.940.0",
+    "bullmq": "^5.63.0",
+    "nodemailer": "^10.1.4"
+  },
+  "devDependencies": {
+    "prisma": "6.19.0",
+    "tsx": "^4.20.6",
+    "esbuild": "^0.25.12",
+    "@types/express": "^5.0.5",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/cors": "^2.8.19",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/compression": "^1.8.1",
+    "@types/hpp": "^0.2.6",
+    "@types/sanitize-html": "^2.16.0",
+    "@types/multer": "^2.0.0",
+    "@types/nodemailer": "^7.0.4",
+    "supertest": "^7.1.4",
+    "@types/supertest": "^6.0.3"
+  }
+}

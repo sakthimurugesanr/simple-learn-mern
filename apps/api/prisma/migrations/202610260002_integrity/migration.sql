@@ -1,0 +1,11 @@
+ALTER TABLE "Product" ADD CONSTRAINT "product_price_positive" CHECK (price > 0), ADD CONSTRAINT "product_compare_nonnegative" CHECK ("compareAtPrice" IS NULL OR "compareAtPrice" >= 0);
+ALTER TABLE "ProductVariant" ADD CONSTRAINT "variant_stock_nonnegative" CHECK (stock >= 0), ADD CONSTRAINT "variant_price_nonnegative" CHECK (price IS NULL OR price >= 0);
+ALTER TABLE "CartItem" ADD CONSTRAINT "cart_quantity_positive" CHECK (quantity BETWEEN 1 AND 20);
+ALTER TABLE "OrderItem" ADD CONSTRAINT "order_item_values_valid" CHECK (quantity > 0 AND price >= 0);
+ALTER TABLE "Order" ADD CONSTRAINT "order_total_valid" CHECK (total >= 0 AND subtotal >= 0 AND shipping >= 0 AND tax >= 0 AND discount >= 0 AND total = subtotal - discount + shipping + tax);
+ALTER TABLE "Offer" ADD CONSTRAINT "offer_bounds" CHECK (percent BETWEEN 1 AND 90 AND minimum >= 0 AND "endsAt" > "startsAt");
+ALTER TABLE "Settings" ADD CONSTRAINT "settings_bounds" CHECK (shipping >= 0 AND "expressShipping" >= 0 AND "freeShippingThreshold" >= 0 AND "taxBps" BETWEEN 0 AND 10000);
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE INDEX "Product_name_trgm" ON "Product" USING gin (name gin_trgm_ops);
+CREATE FUNCTION prevent_audit_mutation() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'Audit records are immutable'; END; $$;
+CREATE TRIGGER audit_immutable BEFORE UPDATE OR DELETE ON "AuditLog" FOR EACH ROW EXECUTE FUNCTION prevent_audit_mutation();

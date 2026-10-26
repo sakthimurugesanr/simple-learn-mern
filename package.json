@@ -1,0 +1,37 @@
+{
+  "name": "aurel-commerce",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter './apps/*' dev",
+    "build": "pnpm --filter @aurel/shared build && pnpm --filter @aurel/api build && pnpm --filter @aurel/web build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "db:generate": "pnpm --filter @aurel/api exec prisma generate",
+    "db:migrate": "pnpm --filter @aurel/api exec prisma migrate deploy",
+    "db:seed": "pnpm --filter @aurel/api exec node --env-file=.env --import tsx prisma/seed.ts",
+    "db:studio": "pnpm --filter @aurel/api exec prisma studio",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5",
+    "@playwright/test": "^1.58.2",
+    "eslint": "^9.39.1",
+    "typescript-eslint": "^8.48.0",
+    "@eslint/js": "^9.39.1",
+    "prettier": "^3.7.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "@types/node": "^22.19.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

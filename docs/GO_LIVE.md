@@ -1,0 +1,22 @@
+# Go-live checklist
+
+- [ ] Review `STATUS.md` and complete the remaining business-critical requirements.
+- [ ] Replace brand, canonical domain, SEO copy and sample photography with licensed business assets.
+- [ ] Set and test the country-code WhatsApp number.
+- [ ] Provision a secure administrator; exclude demonstration accounts and seed credentials from production.
+- [ ] Configure unique JWT, database, Redis, SMTP and storage secrets through a secret manager.
+- [ ] Configure SMTP sender SPF/DKIM/DMARC; test verification/reset emails and failed-job alerts.
+- [ ] Set matching Turnstile keys and allowed domains.
+- [ ] Enable HTTPS, Cloudflare Full (strict), secure cookies and verified proxy boundaries.
+- [ ] Confirm tax, shipping, discount and manual refund rules.
+- [ ] Publish reviewed legal identity, privacy, terms, shipping, returns and grievance policies.
+- [ ] Apply migrations to a fresh staging DB; repeat migrate deploy and confirm no pending changes.
+- [ ] Run permission/IDOR, session-reuse, rate-limit and concurrent stock tests.
+- [ ] Run full COD, WhatsApp, supervisor-upload and permission-change browser journeys.
+- [ ] Configure GitHub required checks and production environment manual reviewers.
+- [ ] Resolve dependency, CodeQL, Trivy and secret-scan findings.
+- [ ] Measure Lighthouse, Core Web Vitals, 320px layout, keyboard accessibility, contrast and bundle size.
+- [ ] Run load tests, inspect SQL plans and size DB pools per API replica.
+- [ ] Configure uptime, error, queue and storage alerts with PII-safe reporting.
+- [ ] Enable encrypted backups and object versioning; rehearse restore and record RPO/RTO.
+- [ ] Record immutable image digests and rehearse rollback.
