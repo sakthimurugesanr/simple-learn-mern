@@ -45,7 +45,7 @@
     "@fontsource-variable/inter": "^5.2.8"
   },
   "devDependencies": {
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.3.5",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
