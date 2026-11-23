@@ -38,7 +38,7 @@ jobs:
             NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL }}
             NEXT_PUBLIC_TURNSTILE_SITE_KEY=${{ vars.TURNSTILE_SITE_KEY }}
             STORAGE_HOST=${{ vars.STORAGE_HOST }}
-      - uses: aquasecurity/trivy-action@0.28.0
+      - uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ghcr.io/${{ env.IMAGE_NAMESPACE }}/api:${{ github.sha }}
           severity: CRITICAL,HIGH
